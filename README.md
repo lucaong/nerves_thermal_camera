@@ -7,7 +7,7 @@ should work on other WiFi-enabled Raspberri Pi models too.
 Other platforms supported by Nerves _should_ work too, but may need
 modifications.
 
-![Nerves Thermal Camera](https://raw.githubusercontent.com/lucaong/nerves_thermal_camera/master/thermalcam-image.png)
+![Nerves Thermal Camera](https://raw.githubusercontent.com/lucaong/nerves_thermal_camera/master/thermalcam-image-1541286020608.png)
 
 # Build and installation
 
