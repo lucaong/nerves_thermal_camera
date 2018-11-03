@@ -7,6 +7,8 @@ should work on other WiFi-enabled Raspberri Pi models too.
 Other platforms supported by Nerves _should_ work too, but may need
 modifications.
 
+![Nerves Thermal Camera](https://github.com/fhunleth/fwup/raw/master/docs/thermalcam-image-1541268575911.png)
+
 # Build and installation
 
 The pre-requisite is that you have installed the [Elixir
