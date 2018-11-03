@@ -8,7 +8,7 @@ const takePicture = function () {
   if (navigator && navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
     a.target = '_blank'
   } else {
-    a.download = `thermacam-image-${(new Date()).valueOf()}.png`
+    a.download = `thermalcam-image-${(new Date()).valueOf()}.png`
   }
   document.body.appendChild(a)
   a.click()
