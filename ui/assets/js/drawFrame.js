@@ -1,11 +1,11 @@
 const drawFrame = function (ctx, data) {
   if (data == null) { return }
 
-  const px = 24
-  const py = 32
-  const width = px * 20
-  const height = py * 20
+  const px = data.length // 24
+  const py = data[0].length // 32
   const ps = 20
+  const width = px * ps
+  const height = py * ps
 
   let min = Infinity
   let max = -Infinity
@@ -21,7 +21,9 @@ const drawFrame = function (ctx, data) {
     row.forEach((pixelTemperature, ci) => {
       const h = mapValue(pixelTemperature, min, max, 240, 0)
       ctx.fillStyle = `hsla(${h}, 100%, 50%, 50%)`
-      ctx.fillRect(ps * ri - ps * 0.25, ps * ci - ps * 0.25, ps * 1.5, ps * 1.5)
+      ctx.fillRect(ps * ri - ps * 0.5, ps * ci - ps * 0.5, ps * 1.5, ps * 1.5)
+      ctx.fillStyle = `hsla(${h}, 100%, 50%, 100%)`
+      ctx.fillRect(ps * ri, ps * ci, ps, ps)
     })
   })
 
@@ -38,10 +40,10 @@ const drawFrame = function (ctx, data) {
 
   if (window.Ui.targetMode) {
     drawViewfinder(ctx, width, height, ps * 2)
-    const a = data[py / 2 - 1][px / 2 - 1]
-    const b = data[py / 2 - 1][px / 2]
-    const c = data[py / 2][px / 2 - 1]
-    const d = data[py / 2][px / 2]
+    const a = data[px / 2 - 1][py / 2 - 1]
+    const b = data[px / 2 - 1][py / 2]
+    const c = data[px / 2][py / 2 - 1]
+    const d = data[px / 2][py / 2]
     const avgT = (a + b + c + d) / 4
 
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
