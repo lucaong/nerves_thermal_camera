@@ -1,0 +1,42 @@
+# Custom Nerves RPi0 config.txt
+#
+# This should be the same as the default configuration, but setting I2C baudrate
+# to 400 KHz
+#
+
+kernel=zImage
+
+# Disable the boot rainbow
+disable_splash=1
+
+# This, along with the Raspberry Pi "x" firmware is need for the camera
+# to work. The Raspberry Pi "x" firmware is selected via the Buildroot
+# configuration. See Target packages->Hardware handling->Firmware.
+gpu_mem=192
+
+# Enable I2C, SPI, and audio
+dtparam=i2c_arm=on,i2c_arm_baudrate=400000
+dtparam=spi=on
+dtparam=audio=on
+
+# Comment this in or modify to enable OneWire
+# NOTE: check that the overlay that you specify is in the boot partition or
+#       this won't work.
+#dtoverlay=w1-gpio-pullup,gpiopin=4
+dtoverlay=dwc2
+
+# Enable the UART (/dev/ttyAMA0) on the RPi0.
+enable_uart=1
+dtoverlay=pi3-miniuart-bt
+
+# The active LED is active low instead of active high like other Raspberry Pis
+dtparam=act_led_activelow=on
+
+# The default is to blink the LED on MicroSD card accesses, but this isn't
+# that useful since Nerves has very few accesses. Switch it to a heartbeat
+# so that it's easy to see if the processor hangs.
+dtparam=act_led_trigger=heartbeat
+
+# To turn the LED completely off comment out the previous line and uncomment
+# the next.
+#dtparam=act_led_trigger=none

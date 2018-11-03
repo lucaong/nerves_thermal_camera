@@ -1,0 +1,11 @@
+<div class="main">
+  <canvas id="camera" width="480" height="680"></canvas>
+  <div class="actions">
+    <button class="btn btn-grey" id="takePicture">
+      <i class="icon icon-camera">Take picture</i>
+    </button>
+    <button class="btn btn-grey" id="toggleMeasureMode">
+      <i class="icon icon-viewfinder">Toggle measure mode</i>
+    </button>
+  </div>
+</div>
