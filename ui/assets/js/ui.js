@@ -1,10 +1,15 @@
 
 const takePicture = function () {
   const canvas = document.getElementById('camera')
-  const dataURL = canvas.toDataURL('image/png', 1.0).replace('image/png', 'image/octet-stream')
+  const dataURL = canvas.toDataURL('image/png', 1.0)
   const a = document.createElement('a')
   a.href = dataURL
-  a.download = `thermacam-image-${(new Date()).valueOf()}.png`
+  // iOS does not support the download attribute
+  if (navigator && navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
+    a.target = '_blank'
+  } else {
+    a.download = `thermacam-image-${(new Date()).valueOf()}.png`
+  }
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
