@@ -19,7 +19,7 @@ respective websites.
 Then:
 
   1. Clone or download the repository and open your terminal
-  2. `cd` into the project directory and the following environment variables:
+  2. `cd` into the project directory and set the following environment variables:
      ```bash
      export MIX_TARGET=rpi0 # (or another Nerves target like `rpi3`)
      export MIX_ENV=prod
