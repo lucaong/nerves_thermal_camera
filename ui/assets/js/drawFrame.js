@@ -20,8 +20,22 @@ const drawFrame = function (ctx, data) {
   data.forEach((row, ri) => {
     row.forEach((pixelTemperature, ci) => {
       const h = mapValue(pixelTemperature, min, max, 240, 0)
+      // Pixel "x" is the real one, others are interpolated:
+      // +---+---+---+
+      // |   |   |   |
+      // +---+---+---+
+      // |   | x |   |
+      // +---+---+---+
+      // |   |   |   |
+      // +---+---+---+
+      ctx.fillStyle = `hsla(${h}, 100%, 50%, 25%)`
+      ctx.fillRect(ps * ri - ps * 0.5, ps * ci - ps * 0.5, ps * 0.5, ps * 0.5)
       ctx.fillStyle = `hsla(${h}, 100%, 50%, 50%)`
-      ctx.fillRect(ps * ri - ps * 0.5, ps * ci - ps * 0.5, ps * 1.5, ps * 1.5)
+      ctx.fillRect(ps * ri - ps * 0.5, ps * ci, ps * 0.5, ps * 0.5)
+      ctx.fillStyle = `hsla(${h}, 100%, 50%, 33%)`
+      ctx.fillRect(ps * ri - ps * 0.5, ps * ci + ps * 0.5, ps * 0.5, ps * 0.5)
+      ctx.fillStyle = `hsla(${h}, 100%, 50%, 50%)`
+      ctx.fillRect(ps * ri, ps * ci - ps * 0.5, ps, ps * 0.5)
       ctx.fillStyle = `hsla(${h}, 100%, 50%, 100%)`
       ctx.fillRect(ps * ri, ps * ci, ps, ps)
     })
