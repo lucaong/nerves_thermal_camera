@@ -12,34 +12,27 @@ modifications.
 # Build and installation
 
 The pre-requisite is that you have installed the [Elixir
-language](https://elixir-lang.org) and [Nerves](https://nerves-project.org). You
-can find installation guides on their respective websites.
+language](https://elixir-lang.org), [Nerves](https://nerves-project.org), and
+[Node.js](https://nodejs.org/en/). You can find installation guides on their
+respective websites.
 
 Then:
 
-  1. Clone or download the repository
-  2. Go to the `ui` folder and run:
-      ```bash
-      mix deps.get
-      cd assets
-      npm install
-      node_modules/brunch/bin/brunch build --production
-      cd ../
-      mix phx.digest
-      ```
-  3. Then go to the `firmware` folder and run:
+  1. Clone or download the repository and open your terminal
+  2. `cd` into the project directory and the following environment variables:
      ```bash
      export MIX_TARGET=rpi0 # (or another Nerves target like `rpi3`)
      export MIX_ENV=prod
-     export NERVES_NETWORK_SSID=WiFiSSID    # substitute WiFiSSID with your WiFi SSID
-     export NERVES_NETWORK_PSK=WiFiPassword # substitute WiFiPassword with your WiFi password
-     mix deps.get
-     mix firmware
+     # In the following two commands, replace `your_ssid` with your WiFi SSID
+     # and `your_psk` with your WiFi password
+     export NERVES_NETWORK_SSID=your_ssid
+     export NERVES_NETWORK_PSK=your_psk
      ```
-  7. Insert an SD card in your computer, and from the same terminal window as
-     before run `mix firmware.burn` to burn the firmware on the SD card
+  3. Run `make firmware` to build the firmware
+  4. Insert the SD card in your computer and, from the same terminal window as
+     before, run `make firmware.burn` to burn the firmware on the SD card.
 
-You should be ready to go.
+The SD card should now be ready.
 
 
 # Usage
