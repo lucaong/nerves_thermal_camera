@@ -5,7 +5,7 @@
 ##  for read only filesystem.
 
 # -name firmware@0.0.0.0
--setcookie 2c7uhqjjssc4npt5gyztidb2c7vdn3nbm7o7o557dmrvvosircqdc2rtkxlkx6o2
+-setcookie <%= @release.options[:cookie] %>
 
 ## Use Ctrl-C to interrupt the current shell rather than invoking the emulator's
 ## break handler and possibly exiting the VM.
