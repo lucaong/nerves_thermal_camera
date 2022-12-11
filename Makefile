@@ -6,8 +6,8 @@ FIRMWARE_DIR = $(ROOT_DIR)firmware
 firmware:
 	@echo MIX_ENV=$(MIX_ENV)
 	@echo MIX_TARGET=$(MIX_TARGET)	
-	@echo NERVES_NETWORK_SSID=$(NERVES_NETWORK_SSID)
-	@echo NERVES_NETWORK_PSK=$(NERVES_NETWORK_PSK)
+	@echo THERMALCAM_SSID=$(THERMALCAM_SSID)
+	@echo THERMALCAM_PSK=$(THERMALCAM_PSK)
 	cd $(UI_DIR); mix deps.get
 	cd $(UI_DIR)/assets; npm install; node_modules/.bin/brunch build --production
 	cd $(UI_DIR); mix phx.digest
@@ -17,6 +17,6 @@ firmware:
 firmware.burn:
 	@echo MIX_ENV=$(MIX_ENV)
 	@echo MIX_TARGET=$(MIX_TARGET)	
-	@echo NERVES_NETWORK_SSID=$(NERVES_NETWORK_SSID)
-	@echo NERVES_NETWORK_PSK=$(NERVES_NETWORK_PSK)
+	@echo THERMALCAM_SSID=$(THERMALCAM_SSID)
+	@echo THERMALCAM_PSK=$(THERMALCAM_PSK)
 	cd $(FIRMWARE_DIR); mix firmware.burn

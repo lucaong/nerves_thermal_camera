@@ -3,7 +3,16 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-use Mix.Config
+import Config
+
+Application.start(:nerves_bootstrap)
+
+config :firmware, target: Mix.target()
+
+config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
+config :nerves, source_date_epoch: "1577974981"
+
+config :logger, backends: [RingLogger]
 
 config :ui, UiWeb.Endpoint,
   url: [host: "thermalcam.local"],

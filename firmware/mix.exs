@@ -8,11 +8,10 @@ defmodule Firmware.MixProject do
     [
       app: @app,
       version: "0.1.0",
-      elixir: "~> 1.6",
-      archives: [nerves_bootstrap: "~> 1.6"],
+      elixir: "~> 1.9",
+      archives: [nerves_bootstrap: "~> 1.9"],
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.target() != :host,
-      aliases: [loadconfig: [&bootstrap/1]],
       releases: [{@app, release()}],
       preferred_cli_target: [run: :host, test: :host],
       deps: deps()
@@ -29,13 +28,6 @@ defmodule Firmware.MixProject do
     ]
   end
 
-  # Starting nerves_bootstrap adds the required aliases to Mix.Project.config()
-  # Aliases are only added if MIX_TARGET is set.
-  def bootstrap(args) do
-    Application.start(:nerves_bootstrap)
-    Mix.Task.run("loadconfig", args)
-  end
-
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
@@ -48,12 +40,15 @@ defmodule Firmware.MixProject do
   defp deps do
     [
       {:nerves, "~> 1.9", runtime: false},
-      {:shoehorn, "~> 0.6"},
-      {:ring_logger, "~> 0.4"},
+      {:shoehorn, "~> 0.9"},
+      {:ring_logger, "~> 0.8"},
+      {:toolshed, "~> 0.2.13"},
 
-      {:nerves_runtime, "~> 0.6", targets: @all_targets},
-      {:ui, path: "../ui", targets: @all_targets},
+      {:nerves_runtime, "~> 0.13", targets: @all_targets},
       {:nerves_pack, "~> 0.7.0", targets: @all_targets},
+      {:delux, "~> 0.4.1", targets: @all_targets},
+
+      {:ui, path: "../ui", env: Mix.env()},
 
       {:nerves_system_rpi, "~> 1.21.1", runtime: false, targets: :rpi},
       {:nerves_system_rpi0, "~> 1.21.1", runtime: false, targets: :rpi0},

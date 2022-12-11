@@ -23,9 +23,13 @@ defmodule Firmware.Application do
   end
 
   def children(_target) do
+    delux_options = Application.get_all_env(:led)
+
     [
       # Starts a worker by calling: Firmware.Worker.start_link(arg)
       # {Firmware.Worker, arg},
+
+      {Delux, delux_options ++ [initial: Delux.Effects.blink(:on, 2)]}
     ]
   end
 end

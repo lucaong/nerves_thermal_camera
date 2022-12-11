@@ -25,9 +25,14 @@ Then:
      export MIX_ENV=prod
      # In the following two commands, replace `your_ssid` with your WiFi SSID
      # and `your_psk` with your WiFi password
-     export NERVES_NETWORK_SSID=your_ssid
-     export NERVES_NETWORK_PSK=your_psk
+     export THERMALCAM_SSID=your_ssid
+     export THERMALCAM_PSK=your_psk
      ```
+
+     Optionally, you can also set these environment variables:
+     `THERMALCAM_NET_REG_DOMAIN` for the regulatory domain of the network
+     (default to `DE`), and `THERMALCAM_KEY_MGMT` for the key management
+     (default to `wpa_psk`).
   3. Run `make firmware` to build the firmware
   4. Insert the SD card in your computer and, from the same terminal window as
      before, run `make firmware.burn` to burn the firmware on the SD card.

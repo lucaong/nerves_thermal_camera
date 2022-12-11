@@ -1,29 +1,45 @@
-use Mix.Config
+import Config
 
 # Customize non-Elixir parts of the firmware. See
 # https://hexdocs.pm/nerves/advanced-configuration.html for details.
 
-config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
+config :nerves,
+  erlinit: [
+    hostname_pattern: "nerves-%s"
+  ]
 
 # Use shoehorn to start the main application. See the shoehorn
 # docs for separating out critical OTP applications such as those
 # involved with firmware updates.
 
-config :shoehorn,
-  init: [:nerves_runtime, :nerves_pack],
-  app: Mix.Project.config()[:app]
+config :shoehorn, init: [:nerves_runtime, :nerves_pack]
 
-# Use Ringlogger as the logger backend and remove :console.
-# See https://hexdocs.pm/ring_logger/readme.html for more information on
-# configuring ring_logger.
+# SSH
+keys =
+  [
+    Path.join([System.user_home!(), ".ssh", "id_rsa.pub"]),
+    Path.join([System.user_home!(), ".ssh", "id_ecdsa.pub"]),
+    Path.join([System.user_home!(), ".ssh", "id_ed25519.pub"])
+  ]
+  |> Enum.filter(&File.exists?/1)
 
-config :logger, backends: [RingLogger]
+if keys == [],
+  do:
+    Mix.raise("""
+    No SSH public keys found in ~/.ssh. An ssh authorized key is needed to
+    log into the Nerves device and update firmware on it using ssh.
+    See your project's config.exs for this error message.
+    """)
+
+config :nerves_ssh,
+  authorized_keys: Enum.map(keys, &File.read!/1)
 
 key_mgmt = System.get_env("THERMALCAM_KEY_MGMT") || "wpa_psk"
 
 config :vintage_net,
   regulatory_domain: System.get_env("THERMALCAM_NET_REG_DOMAIN") || "DE",
   config: [
+    {"usb0", %{type: VintageNetDirect}},
     {"eth0", %{type: VintageNetEthernet, ipv4: %{method: :dhcp}}},
     {
       "wlan0",
@@ -59,5 +75,15 @@ config :mdns_lite,
       protocol: "ssh",
       transport: "tcp",
       port: 22
+    },
+    %{
+      protocol: "sftp-ssh",
+      transport: "tcp",
+      port: 22
+    },
+    %{
+      protocol: "epmd",
+      transport: "tcp",
+      port: 4369
     }
   ]
