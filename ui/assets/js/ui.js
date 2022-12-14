@@ -1,4 +1,3 @@
-
 const takePicture = function () {
   const canvas = document.getElementById('camera')
   const dataURL = canvas.toDataURL('image/png', 1.0)

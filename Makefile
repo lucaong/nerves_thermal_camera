@@ -9,8 +9,7 @@ firmware:
 	@echo THERMALCAM_SSID=$(THERMALCAM_SSID)
 	@echo THERMALCAM_PSK=$(THERMALCAM_PSK)
 	cd $(UI_DIR); mix deps.get
-	cd $(UI_DIR)/assets; npm install; node_modules/.bin/brunch build --production
-	cd $(UI_DIR); mix phx.digest
+	cd $(UI_DIR); mix assets.deploy
 	cd $(FIRMWARE_DIR); mix deps.get; mix firmware
 
 .PHONY: firmware.burn

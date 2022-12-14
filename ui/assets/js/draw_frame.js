@@ -52,7 +52,7 @@ const drawFrame = function (ctx, data) {
     ctx.fillText(`${t.toFixed(2)}º`, 20 + i * (width - 20) / steps.length, height + 30)
   })
 
-  if (window.Ui.targetMode) {
+  if (window.Ui.targetMode && data != null) {
     drawViewfinder(ctx, width, height, ps * 2)
     const a = data[px / 2 - 1][py / 2 - 1]
     const b = data[px / 2 - 1][py / 2]

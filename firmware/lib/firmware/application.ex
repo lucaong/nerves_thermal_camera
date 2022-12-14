@@ -23,7 +23,7 @@ defmodule Firmware.Application do
   end
 
   def children(_target) do
-    delux_options = Application.get_all_env(:led)
+    delux_options = Application.get_all_env(:firmware)
 
     [
       # Starts a worker by calling: Firmware.Worker.start_link(arg)

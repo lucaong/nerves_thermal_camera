@@ -1,12 +1,14 @@
 defmodule UiWeb.UserSocket do
   use Phoenix.Socket
 
-  ## Channels
-  channel "camera", UiWeb.CameraChannel
+  # A Socket handler
+  #
+  # It's possible to control the websocket connection and
+  # assign values that can be accessed by your channel topics.
 
-  ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
-  # transport :longpoll, Phoenix.Transports.LongPoll
+  ## Channels
+
+  channel "camera:*", UiWeb.CameraChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -19,7 +21,8 @@ defmodule UiWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
+  @impl true
+  def connect(_params, socket, _connect_info) do
     {:ok, socket}
   end
 
@@ -30,8 +33,9 @@ defmodule UiWeb.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     UiWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
+  #     Elixir.UiWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
+  @impl true
   def id(_socket), do: nil
 end

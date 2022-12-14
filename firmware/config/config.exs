@@ -16,13 +16,16 @@ config :logger, backends: [RingLogger]
 
 config :ui, UiWeb.Endpoint,
   url: [host: "thermalcam.local"],
-  http: [port: 80],
-  secret_key_base: "xOVJbs6T8CzNNiy05Xz3A1vLsWhic9SwhxWoEmfPk5zM3mQ5uoiSu4ILeemsUT3k",
-  root: Path.dirname(__DIR__),
+  http: [port: 80, ip: {0, 0, 0, 0, 0, 0, 0, 0}],
   server: true,
-  render_errors: [view: UiWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Nerves.PubSub, adapter: Phoenix.PubSub.PG2],
-  code_reloader: false
+  secret_key_base: "xOVJbs6T8CzNNiy05Xz3A1vLsWhic9SwhxWoEmfPk5zM3mQ5uoiSu4ILeemsUT3k",
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  render_errors: [view: UiWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Ui.PubSub,
+  live_view: [signing_salt: "1zOR8f9f"]
+
+
+config :phoenix, :json_library, Jason
 
 # For Devices that don't support usb gadget such as Raspberry Pi 1, 2, and 3:
 # config :nerves_init_gadget,
