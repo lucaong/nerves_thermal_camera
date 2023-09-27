@@ -56,7 +56,7 @@ defmodule Ui.MixProject do
 
   defp deps(_) do
     [
-      {:elixir_mlx90640, "~> 0.1.8"}
+      {:elixir_mlx90640, "~> 0.1.13"}
     ]
   end
 

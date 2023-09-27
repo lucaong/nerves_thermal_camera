@@ -39,7 +39,7 @@ defmodule Firmware.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nerves, "~> 1.9", runtime: false},
+      {:nerves, "~> 1.10", runtime: false},
       {:shoehorn, "~> 0.9"},
       {:ring_logger, "~> 0.8"},
       {:toolshed, "~> 0.2.13"},
@@ -50,13 +50,13 @@ defmodule Firmware.MixProject do
 
       {:ui, path: "../ui", env: Mix.env()},
 
-      {:nerves_system_rpi, "~> 1.21.1", runtime: false, targets: :rpi},
-      {:nerves_system_rpi0, "~> 1.21.1", runtime: false, targets: :rpi0},
-      {:nerves_system_rpi2, "~> 1.21.1", runtime: false, targets: :rpi2},
-      {:nerves_system_rpi3, "~> 1.21.1", runtime: false, targets: :rpi3},
-      {:nerves_system_rpi4, "~> 1.21.1", runtime: false, targets: :rpi4},
-      {:nerves_system_bbb, "~> 2.3", runtime: false, targets: :bbb},
-      {:nerves_system_x86_64, "~> 1.21.1", runtime: false, targets: :x86_64}
+      {:nerves_system_rpi, "~> 1.23", runtime: false, targets: :rpi},
+      {:nerves_system_rpi0, "~> 1.23", runtime: false, targets: :rpi0},
+      {:nerves_system_rpi2, "~> 1.23", runtime: false, targets: :rpi2},
+      {:nerves_system_rpi3, "~> 1.23", runtime: false, targets: :rpi3},
+      {:nerves_system_rpi4, "~> 1.23", runtime: false, targets: :rpi4},
+      {:nerves_system_bbb, "~> 2.18", runtime: false, targets: :bbb},
+      {:nerves_system_x86_64, "~> 1.23", runtime: false, targets: :x86_64}
     ]
   end
 end
